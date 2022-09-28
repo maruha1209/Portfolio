@@ -45,7 +45,7 @@ public class Post {
      */
     @ManyToOne
     @JoinColumn(name = JpaConst.POS_COL_USE, nullable = false)
-    private User user_id;
+    private User user;
 
     /**
      * 投稿の内容

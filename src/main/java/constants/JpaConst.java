@@ -22,7 +22,7 @@ public interface JpaConst {
     String TABLE_POS = "posts"; //テーブル名
     //投稿テーブルカラム
     String POS_COL_ID = "id"; //id
-    String POS_COL_USE = "user_id"; //投稿を作成したユーザーのid
+    String POS_COL_USE = "user"; //投稿を作成したユーザーのid
     String POS_COL_CONTENT = "content"; //投稿の内容
     String POS_COL_CREATED_AT = "created_at"; //登録日時
     String POS_COL_UPDATED_AT = "updated_at"; //更新日時
