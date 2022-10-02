@@ -6,6 +6,10 @@ package constants;
  */
 public enum AttributeConst {
 
+    //フラッシュメッセージ
+    FLUSH("flush"),
+
+
     //削除フラグ
     DEL_FLAG_TRUE(1),
     DEL_FLAG_FALSE(0);
