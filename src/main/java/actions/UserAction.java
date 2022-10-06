@@ -1,15 +1,12 @@
 package actions;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 
 import actions.views.UserView;
 import constants.AttributeConst;
 import constants.ForwardConst;
-import constants.MessageConst;
-import constants.PropertyConst;
 import services.UserService;
 
 public class UserAction extends ActionBase {
@@ -36,7 +33,7 @@ public class UserAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-    public void index() throws ServletException, IOException {
+/*    public void index() throws ServletException, IOException {
 
         List<UserView> users = service.getUserAll();
 
@@ -65,7 +62,7 @@ public class UserAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-    public void create() throws ServletException, IOException {
+/*    public void create() throws ServletException, IOException {
 
         //パラメータの値を元に従業員情報のインスタンスを作成する
         UserView ev = new UserView(
@@ -99,9 +96,9 @@ public class UserAction extends ActionBase {
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
 
             //一覧画面にリダイレクト
-            redirect(ForwardConst.ACT_USE, ForwardConst.CMD_INDEX);
+            //redirect(ForwardConst.ACT_USE, ForwardConst.CMD_INDEX);
         }
 
     }
-
+*/
 }

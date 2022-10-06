@@ -1,4 +1,4 @@
-package models.validators;
+/*package models.validators;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +16,12 @@ public class UserValidator {
      * @param passwordCheckFlag パスワードの入力チェックを実施するかどうか(実施する:true 実施しない:false)
      * @return エラーのリスト
      */
-    public static List<String> validate(
+/*    public static List<String> validate(
             UserService service, UserView ev, Boolean codeDuplicateCheckFlag, Boolean passwordCheckFlag) {
         List<String> errors = new ArrayList<String>();
 
         //ユーザーIDのチェック
-        String codeError = validateCode(service, ev.getCode(), codeDuplicateCheckFlag);
+        String codeError = validateCode(service, ev.getID(), codeDuplicateCheckFlag);
         if (!codeError.equals("")) {
             errors.add(codeError);
         }
@@ -43,3 +43,4 @@ public class UserValidator {
 
 
 }
+*/

@@ -1,15 +1,5 @@
 package services;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import actions.views.UserConverter;
-import actions.views.UserView;
-import constants.JpaConst;
-import models.User;
-import models.validators.UserValidator;
-import utils.EncryptUtil;
-
 public class UserService extends ServiceBase{
 
     /**
@@ -18,7 +8,7 @@ public class UserService extends ServiceBase{
      * @param pepper pepper文字列
      * @return バリデーションや登録処理中に発生したエラーのリスト
      */
-    public List<String> create(UserView ev, String pepper) {
+/*    public List<String> create(UserView ev, String pepper) {
 
         //パスワードをハッシュ化して設定
         String pass = EncryptUtil.getPasswordEncrypt(ev.getPassword(), pepper);
@@ -40,13 +30,14 @@ public class UserService extends ServiceBase{
         //エラーを返却（エラーがなければ0件の空リスト）
         return errors;
     }
+*/
 
     /**
      * ユーザーデータを1件登録する
      * @param ev ユーザーデータ
      * @return 登録結果(成功:true 失敗:false)
      */
-    private void create(UserView ev) {
+/*    private void create(UserView ev) {
 
         em.getTransaction().begin();
         em.persist(UserConverter.toModel(ev));
@@ -60,5 +51,5 @@ public class UserService extends ServiceBase{
         return UserConverter.toViewList(users);
     }
 
-
+*/
 }
