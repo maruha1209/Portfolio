@@ -9,6 +9,10 @@ public enum AttributeConst {
     //フラッシュメッセージ
     FLUSH("flush"),
 
+  //入力フォーム共通
+    TOKEN("_token"),
+    ERR("errors"),
+
     //ユーザー管理
     USER("user"),
     USERS("users"),
