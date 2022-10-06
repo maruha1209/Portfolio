@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import constants.AttributeConst;
 import constants.ForwardConst;
+import constants.PropertyConst;
 
 /**
  * 各Actionクラスの親クラス。共通処理を行う。
@@ -89,6 +90,37 @@ public abstract class ActionBase {
     }
 
     /**
+     * CSRF対策 token不正の場合はエラー画面を表示
+     * @return true: token有効 false: token不正
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected boolean checkToken() throws ServletException, IOException {
+
+        //パラメータからtokenの値を取得
+        String _token = getRequestParam(AttributeConst.TOKEN);
+
+        if (_token == null || !(_token.equals(getTokenId()))) {
+
+            //tokenが設定されていない、またはセッションIDと一致しない場合はエラー画面を表示
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    /**
+     * セッションIDを取得する
+     * @return セッションID
+     */
+    protected String getTokenId() {
+        return request.getSession().getId();
+    }
+
+    /**
      * リクエストパラメータから引数で指定したパラメータ名の値を返却する
      * @param key パラメータ名
      * @return パラメータの値
@@ -131,6 +163,16 @@ public abstract class ActionBase {
      */
     protected void removeSessionScope(AttributeConst key) {
         request.getSession().removeAttribute(key.getValue());
+    }
+
+    /**
+     * アプリケーションスコープから指定されたパラメータの値を取得し、返却する
+     * @param key パラメータ名
+     * @return パラメータの値
+     */
+    @SuppressWarnings("unchecked")
+    protected <R> R getContextScope(PropertyConst key) {
+        return (R) context.getAttribute(key.getValue());
     }
 
 }
