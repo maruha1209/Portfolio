@@ -20,7 +20,7 @@ public class UserView {
     /**
      * ユーザーid
      */
-    private String user_id;
+    private String id;
 
     /**
      * 氏名

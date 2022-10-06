@@ -8,7 +8,7 @@ public interface JpaConst {
     // ユーザーテーブル
     String TABLE_USE = "users"; //テーブル名
     // ユーザーテーブルカラム
-    String USE_COL_ID = "user_id"; //ユーザーID
+    String USE_COL_ID = "id"; //ユーザーID
     String USE_COL_NAME = "name"; //氏名
     String USE_COL_PASS = "password"; //パスワード
     String USE_COL_CREATED_AT = "created_at"; //登録日時

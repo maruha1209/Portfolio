@@ -21,7 +21,7 @@ public class UserConverter {
     public static User toModel(UserView uv) {
 
         return new User(
-                uv.getUser_id(),
+                uv.getId(),
                 uv.getName(),
                 uv.getPassword(),
                 uv.getCreatedAt(),
@@ -45,7 +45,7 @@ public class UserConverter {
         }
 
         return new UserView(
-                u.getUser_id(),
+                u.getId(),
                 u.getName(),
                 u.getPassword(),
                 u.getCreatedAt(),
@@ -78,7 +78,7 @@ public class UserConverter {
      * @param uv Viewモデル(コピー元)
      */
     public static void copyViewToModel(User u, UserView uv) {
-        u.setUser_id(uv.getUser_id());
+        u.setId(uv.getId());
         u.setName(uv.getName());
         u.setPassword(uv.getPassword());
         u.setCreatedAt(uv.getCreatedAt());

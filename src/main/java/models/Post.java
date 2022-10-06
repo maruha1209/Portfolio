@@ -23,7 +23,7 @@ import lombok.Setter;
  * 投稿データのDTOモデル
  *
  */
-@Table(name = JpaConst.TABLE_USE)
+@Table(name = JpaConst.TABLE_POS)
 
 @Getter
 @Setter
