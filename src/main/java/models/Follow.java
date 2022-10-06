@@ -50,7 +50,7 @@ public class Follow {
      * フォローされたユーザーID
      */
     @ManyToOne
-    @JoinColumn(name = JpaConst.USE_COL_ID, referencedColumnName = JpaConst.FOL_COL_FOLLOWER_USE, nullable = false)
+    @JoinColumn(name = JpaConst.USE_COL_ID, referencedColumnName = JpaConst.FOL_COL_FOLLOWEE_USE, nullable = false)
     private User followee;
 
     /**
