@@ -9,6 +9,14 @@ public enum AttributeConst {
     //フラッシュメッセージ
     FLUSH("flush"),
 
+    //ユーザー管理
+    USER("user"),
+    USERS("users"),
+    USE_COUNT("users_count"),
+    USE_ID("id"),
+    USE_CODE("code"),
+    USE_PASS("password"),
+    USE_NAME("name"),
 
     //削除フラグ
     DEL_FLAG_TRUE(1),

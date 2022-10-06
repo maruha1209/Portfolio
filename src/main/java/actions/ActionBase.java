@@ -1,6 +1,8 @@
 package actions;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -44,6 +46,31 @@ public abstract class ActionBase {
      */
     public abstract void process() throws ServletException, IOException;
 
+    protected void invoke()
+            throws ServletException, IOException {
+
+        Method commandMethod;
+        try {
+
+            //パラメータからcommandを取得
+            String command = request.getParameter(ForwardConst.CMD.getValue());
+
+            //ommandに該当するメソッドを実行する
+            //(例: action=Employee command=show の場合 EmployeeActionクラスのshow()メソッドを実行する)
+            commandMethod = this.getClass().getDeclaredMethod(command, new Class[0]);
+            commandMethod.invoke(this, new Object[0]); //メソッドに渡す引数はなし
+
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NullPointerException e) {
+
+            //発生した例外をコンソールに表示
+            e.printStackTrace();
+            //commandの値が不正で実行できない場合エラー画面を呼び出し
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+        }
+
+    }
+
     /**
      * 指定されたjspの呼び出しを行う
      * @param target 遷移先jsp画面のファイル名(拡張子を含まない)
@@ -59,6 +86,15 @@ public abstract class ActionBase {
         //jspファイルの呼び出し
         dispatcher.forward(request, response);
 
+    }
+
+    /**
+     * リクエストパラメータから引数で指定したパラメータ名の値を返却する
+     * @param key パラメータ名
+     * @return パラメータの値
+     */
+    protected String getRequestParam(AttributeConst key) {
+        return request.getParameter(key.getValue());
     }
 
     /**

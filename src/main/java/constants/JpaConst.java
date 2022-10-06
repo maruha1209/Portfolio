@@ -35,4 +35,13 @@ public interface JpaConst {
     String FOL_COL_FOLLOWEE_USE = "followee"; //フォローされたユーザーのid
     String FOL_COL_CREATED_AT = "created_at"; //登録日時
     String FOL_COL_UPDATED_AT = "updated_at"; //更新日時
+
+    //Entity名
+    String ENTITY_USE = "user"; //ユーザー
+
+    //NamedQueryの nameとquery
+    //全ての従業員をidの降順に取得する
+    String Q_USE_GET_ALL = ENTITY_USE + ".getAll"; //name
+    String Q_USE_GET_ALL_DEF = "SELECT e FROM User AS e ORDER BY e.id DESC"; //query
+
 }
