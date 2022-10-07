@@ -48,13 +48,16 @@ public class UserAction extends ActionBase {
      * 新規登録画面を表示する
      * @throws ServletException
      * @throws IOException
+     * http://localhost:8080/Portfolio/?action=User&command=entryNew
      */
     public void entryNew() throws ServletException, IOException {
 
-        putRequestScope(AttributeConst.USER, new UserView()); //空のユーザーインスタンス
+            putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+            putRequestScope(AttributeConst.USER, new UserView()); //空の従業員インスタンス
 
-        //新規登録画面を表示
-        forward(ForwardConst.FW_USE_NEW);
+            //新規登録画面を表示
+            forward(ForwardConst.FW_USE_NEW);
+
     }
 
     /**
