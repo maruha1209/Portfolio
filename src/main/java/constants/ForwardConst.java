@@ -8,7 +8,7 @@ public enum ForwardConst {
 
     //action
     ACT("action"),
-    ACT_USE("user"),
+    ACT_USE("User"),
     ACT_AUTH("Auth"),
 
     //command

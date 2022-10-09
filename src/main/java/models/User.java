@@ -25,6 +25,15 @@ import lombok.Setter;
     @NamedQuery(
             name = JpaConst.Q_USE_GET_ALL,
             query = JpaConst.Q_USE_GET_ALL_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_USE_COUNT,
+            query = JpaConst.Q_USE_COUNT_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_USE_COUNT_REGISTERED_BY_ID,
+            query = JpaConst.Q_USE_COUNT_REGISTERED_BY_ID_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_USE_GET_BY_ID_AND_PASS,
+            query = JpaConst.Q_USE_GET_BY_ID_AND_PASS_DEF)
 })
 
 @Getter

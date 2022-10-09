@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -8,6 +9,7 @@ import actions.views.UserConverter;
 import actions.views.UserView;
 import constants.JpaConst;
 import models.User;
+import models.validators.UserValidator;
 import utils.EncryptUtil;
 
 /**
@@ -54,8 +56,8 @@ public class UserService extends ServiceBase {
             String pass = EncryptUtil.getPasswordEncrypt(plainPass, pepper);
 
             //社員番号とハッシュ化済パスワードを条件に未削除の従業員を1件取得する
-            e = em.createNamedQuery(JpaConst.Q_USE_GET_BY_CODE_AND_PASS, User.class)
-                    .setParameter(JpaConst.JPQL_PARM_CODE, code)
+            e = em.createNamedQuery(JpaConst.Q_USE_GET_BY_ID_AND_PASS, User.class)
+                    .setParameter(JpaConst.JPQL_PARM_ID, code)
                     .setParameter(JpaConst.JPQL_PARM_PASSWORD, pass)
                     .getSingleResult();
 
@@ -81,11 +83,11 @@ public class UserService extends ServiceBase {
      * @param code 社員番号
      * @return 該当するデータの件数
      */
-    public long countByCode(String code) {
+    public long countById(String code) {
 
         //指定した社員番号を保持する従業員の件数を取得する
-        long employees_count = (long) em.createNamedQuery(JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE, Long.class)
-                .setParameter(JpaConst.JPQL_PARM_CODE, code)
+        long employees_count = (long) em.createNamedQuery(JpaConst.Q_USE_COUNT_REGISTERED_BY_ID, Long.class)
+                .setParameter(JpaConst.JPQL_PARM_ID, code)
                 .getSingleResult();
         return employees_count;
     }
@@ -96,7 +98,7 @@ public class UserService extends ServiceBase {
      * @param pepper pepper文字列
      * @return バリデーションや登録処理中に発生したエラーのリスト
      */
- /*   public List<String> create(UserView ev, String pepper) {
+    public List<String> create(UserView ev, String pepper) {
 
         //パスワードをハッシュ化して設定
         String pass = EncryptUtil.getPasswordEncrypt(ev.getPassword(), pepper);
@@ -130,14 +132,14 @@ public class UserService extends ServiceBase {
         //idを条件に登録済みの従業員情報を取得する
         UserView savedEmp = findOne(ev.getId());
 
-        boolean validateCode = false;
-        if (!savedEmp.getCode().equals(ev.getCode())) {
+        boolean validateId = false;
+        if (!savedEmp.getId().equals(ev.getId())) {
             //社員番号を更新する場合
 
             //社員番号についてのバリデーションを行う
-            validateCode = true;
+            validateId = true;
             //変更後の社員番号を設定する
-            savedEmp.setCode(ev.getCode());
+            savedEmp.setId(ev.getId());
         }
 
         boolean validatePass = false;
@@ -159,7 +161,7 @@ public class UserService extends ServiceBase {
         savedEmp.setUpdatedAt(today);
 
         //更新内容についてバリデーションを行う
-        List<String> errors = UserValidator.validate(this, savedEmp, validateCode, validatePass);
+        List<String> errors = UserValidator.validate(this, savedEmp, validateId, validatePass);
 
         //バリデーションエラーがなければデータを更新する
         if (errors.size() == 0) {

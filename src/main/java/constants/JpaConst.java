@@ -46,7 +46,7 @@ public interface JpaConst {
     String ENTITY_FOL = "follow";
 
     //JPQL内パラメータ
-    String JPQL_PARM_CODE = "code"; //社員番号
+    String JPQL_PARM_ID = "id"; //社員番号
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_USER = "user"; //従業員
     String JPQL_PARM_FOLLOW = "follow";
@@ -59,11 +59,11 @@ public interface JpaConst {
     String Q_USE_COUNT = ENTITY_USE + ".count";
     String Q_USE_COUNT_DEF = "SELECT COUNT(e) FROM User AS e";
     //社員番号とハッシュ化済パスワードを条件に未削除の従業員を取得する
-    String Q_USE_GET_BY_CODE_AND_PASS = ENTITY_USE + ".getByCodeAndPass";
-    String Q_USE_GET_BY_CODE_AND_PASS_DEF = "SELECT e FROM User AS e WHERE e.deleteFlag = 0 AND e.code = :" + JPQL_PARM_CODE + " AND e.password = :" + JPQL_PARM_PASSWORD;
+    String Q_USE_GET_BY_ID_AND_PASS = ENTITY_USE + ".getByCodeAndPass";
+    String Q_USE_GET_BY_ID_AND_PASS_DEF = "SELECT e FROM User AS e WHERE e.deleteFlag = 0 AND e.id = :" + JPQL_PARM_ID + " AND e.password = :" + JPQL_PARM_PASSWORD;
     //指定した社員番号を保持する従業員の件数を取得する
-    String Q_USE_COUNT_REGISTERED_BY_CODE = ENTITY_USE + ".countRegisteredByCode";
-    String Q_USE_COUNT_REGISTERED_BY_CODE_DEF = "SELECT COUNT(e) FROM User AS e WHERE e.code = :" + JPQL_PARM_CODE;;
+    String Q_USE_COUNT_REGISTERED_BY_ID = ENTITY_USE + ".countRegisteredByCode";
+    String Q_USE_COUNT_REGISTERED_BY_ID_DEF = "SELECT COUNT(e) FROM User AS e WHERE e.id = :" + JPQL_PARM_ID;;
     //全ての日報をidの降順に取得する
     String Q_POS_GET_ALL = ENTITY_POS + ".getAll";
     String Q_POS_GET_ALL_DEF = "SELECT r FROM Post AS r ORDER BY r.id DESC";

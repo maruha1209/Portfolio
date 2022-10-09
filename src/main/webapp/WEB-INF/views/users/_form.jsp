@@ -15,6 +15,10 @@
 
     </div>
 </c:if>
+<label for="${AttributeConst.USE_ID.getValue()}">ユーザーID</label><br />
+<input type="text" name="${AttributeConst.USE_ID.getValue()}" id="${AttributeConst.USE_ID.getValue()}" value="${user.id}" />
+<br /><br />
+
 <label for="${AttributeConst.USE_NAME.getValue()}">氏名</label><br />
 <input type="text" name="${AttributeConst.USE_NAME.getValue()}" id="${AttributeConst.USE_NAME.getValue()}" value="${user.name}" />
 <br /><br />
