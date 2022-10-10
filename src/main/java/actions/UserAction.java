@@ -101,8 +101,11 @@ public class UserAction extends ActionBase {
             //セッションに登録完了のフラッシュメッセージを設定
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
 
+            //セッションにログインユーザーを設定
+            putSessionScope(AttributeConst.LOGIN_USE, ev);
+
             //一覧画面にリダイレクト
-            //redirect(ForwardConst.ACT_USE, ForwardConst.CMD_INDEX);
+            redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
         }
 
     }
@@ -113,7 +116,7 @@ public class UserAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-  /*  public void show() throws ServletException, IOException {
+    public void show() throws ServletException, IOException {
 
 
             //idを条件に従業員データを取得する
@@ -131,14 +134,14 @@ public class UserAction extends ActionBase {
             //詳細画面を表示
             forward(ForwardConst.FW_USE_SHOW);
 
-    }*/
+    }
 
     /**
      * 編集画面を表示する
      * @throws ServletException
      * @throws IOException
      */
-    /*public void edit() throws ServletException, IOException {
+    public void edit() throws ServletException, IOException {
 
 
             //idを条件に従業員データを取得する
@@ -157,7 +160,7 @@ public class UserAction extends ActionBase {
             //編集画面を表示する
             forward(ForwardConst.FW_USE_EDIT);
 
-    }*/
+    }
 
     /**
      * 更新を行う

@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import actions.views.UserView;
+import constants.AttributeConst;
 import constants.ForwardConst;
 
 /**
@@ -37,9 +39,11 @@ public class TopAction extends ActionBase {
         // 以下追記
 
         //セッションからログイン中の従業員情報を取得
-        /*UserView loginUser = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
+        UserView loginUser = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
 
-        //ログイン中の従業員が作成した日報データを、指定されたページ数の一覧画面に表示する分取得する
+        putRequestScope(AttributeConst.USE_NAME, loginUser.getId());
+
+        /*//ログイン中の従業員が作成した日報データを、指定されたページ数の一覧画面に表示する分取得する
         int page = getPage();
         List<PostView> reports = service.getMinePerPage(loginUser, page);
 
@@ -51,7 +55,7 @@ public class TopAction extends ActionBase {
         //putRequestScope(AttributeConst.PAGE, page); //ページ数
         //putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
 
-        //↑ここまで追記
+        *///↑ここまで追記
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);
@@ -59,8 +63,8 @@ public class TopAction extends ActionBase {
             putRequestScope(AttributeConst.FLUSH, flush);
             removeSessionScope(AttributeConst.FLUSH);
         }
-        http://localhost:8080/Portfolio/?action=Top&command=index
-*/
+        //http://localhost:8080/Portfolio/?action=Top&command=index
+
         //一覧画面を表示
         forward(ForwardConst.FW_TOP_INDEX);
     }

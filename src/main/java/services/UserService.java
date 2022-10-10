@@ -44,12 +44,12 @@ public class UserService extends ServiceBase {
 
     /**
      * 社員番号、パスワードを条件に取得したデータをUserViewのインスタンスで返却する
-     * @param code 社員番号
+     * @param id 社員番号
      * @param plainPass パスワード文字列
      * @param pepper pepper文字列
      * @return 取得データのインスタンス 取得できない場合null
      */
-    public UserView findOne(String code, String plainPass, String pepper) {
+    public UserView findOne(String id, String plainPass, String pepper) {
         User e = null;
         try {
             //パスワードのハッシュ化
@@ -57,7 +57,7 @@ public class UserService extends ServiceBase {
 
             //社員番号とハッシュ化済パスワードを条件に未削除の従業員を1件取得する
             e = em.createNamedQuery(JpaConst.Q_USE_GET_BY_ID_AND_PASS, User.class)
-                    .setParameter(JpaConst.JPQL_PARM_ID, code)
+                    .setParameter(JpaConst.JPQL_PARM_ID, id)
                     .setParameter(JpaConst.JPQL_PARM_PASSWORD, pass)
                     .getSingleResult();
 
@@ -80,14 +80,14 @@ public class UserService extends ServiceBase {
 
     /**
      * 社員番号を条件に該当するデータの件数を取得し、返却する
-     * @param code 社員番号
+     * @param id 社員番号
      * @return 該当するデータの件数
      */
-    public long countById(String code) {
+    public long countById(String id) {
 
         //指定した社員番号を保持する従業員の件数を取得する
         long employees_count = (long) em.createNamedQuery(JpaConst.Q_USE_COUNT_REGISTERED_BY_ID, Long.class)
-                .setParameter(JpaConst.JPQL_PARM_ID, code)
+                .setParameter(JpaConst.JPQL_PARM_ID, id)
                 .getSingleResult();
         return employees_count;
     }
@@ -195,16 +195,16 @@ public class UserService extends ServiceBase {
 
     /**
      * 社員番号とパスワードを条件に検索し、データが取得できるかどうかで認証結果を返却する
-     * @param code 社員番号
+     * @param id 社員番号
      * @param plainPass パスワード
      * @param pepper pepper文字列
      * @return 認証結果を返却す(成功:true 失敗:false)
      */
-    public Boolean validateLogin(String code, String plainPass, String pepper) {
+    public Boolean validateLogin(String id, String plainPass, String pepper) {
 
         boolean isValidUser = false;
-        if (code != null && !code.equals("") && plainPass != null && !plainPass.equals("")) {
-            UserView ev = findOne(code, plainPass, pepper);
+        if (id != null && !id.equals("") && plainPass != null && !plainPass.equals("")) {
+            UserView ev = findOne(id, plainPass, pepper);
 
             if (ev != null && ev.getId() != null) {
 

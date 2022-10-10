@@ -9,7 +9,9 @@ public enum ForwardConst {
     //action
     ACT("action"),
     ACT_USE("User"),
+    ACT_POS("Post"),
     ACT_AUTH("Auth"),
+    ACT_TOP("Top"),
 
     //command
     CMD("command"),
