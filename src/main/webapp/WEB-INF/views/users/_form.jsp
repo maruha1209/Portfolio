@@ -19,7 +19,7 @@
 <input type="text" name="${AttributeConst.USE_ID.getValue()}" id="${AttributeConst.USE_ID.getValue()}" value="${user.id}" />
 <br /><br />
 
-<label for="${AttributeConst.USE_NAME.getValue()}">氏名</label><br />
+<label for="${AttributeConst.USE_NAME.getValue()}">ユーザーネーム</label><br />
 <input type="text" name="${AttributeConst.USE_NAME.getValue()}" id="${AttributeConst.USE_NAME.getValue()}" value="${user.name}" />
 <br /><br />
 
@@ -30,4 +30,4 @@
 <br /><br />
 <input type="hidden" name="${AttributeConst.USE_ID.getValue()}" value="${user.id}" />
 <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
-<button type="submit">投稿</button>
+<button type="submit">登録</button>

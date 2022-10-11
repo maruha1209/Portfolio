@@ -118,18 +118,7 @@ public class UserAction extends ActionBase {
      */
     public void show() throws ServletException, IOException {
 
-
-            //idを条件に従業員データを取得する
-            UserView ev = service.findOne(toNumber(getRequestParam(AttributeConst.USE_ID)));
-
-            if (ev == null || ev.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
-
-                //データが取得できなかった、または論理削除されている場合はエラー画面を表示
-                forward(ForwardConst.FW_ERR_UNKNOWN);
-                return;
-            }
-
-            putRequestScope(AttributeConst.USER, ev); //取得した従業員情報
+            putRequestScope(AttributeConst.LOGIN_USE, getSessionScope(AttributeConst.LOGIN_USE));
 
             //詳細画面を表示
             forward(ForwardConst.FW_USE_SHOW);
@@ -145,7 +134,7 @@ public class UserAction extends ActionBase {
 
 
             //idを条件に従業員データを取得する
-            UserView ev = service.findOne(toNumber(getRequestParam(AttributeConst.USE_ID)));
+            UserView ev = getSessionScope(AttributeConst.LOGIN_USE);
 
             if (ev == null || ev.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
 
@@ -167,14 +156,13 @@ public class UserAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-/*    public void update() throws ServletException, IOException {
+    public void update() throws ServletException, IOException {
 
         //CSRF対策 tokenのチェック
         if (checkToken()) { //追記
             //パラメータの値を元に従業員情報のインスタンスを作成する
             UserView ev = new UserView(
-                    toNumber(getRequestParam(AttributeConst.USE_ID)),
-                    getRequestParam(AttributeConst.USE_CODE),
+                    getRequestParam(AttributeConst.USE_ID),
                     getRequestParam(AttributeConst.USE_NAME),
                     getRequestParam(AttributeConst.USE_PASS),
                     null,
@@ -202,8 +190,12 @@ public class UserAction extends ActionBase {
                 //セッションに更新完了のフラッシュメッセージを設定
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
 
+                UserView uv = service.findOne(getRequestParam(AttributeConst.USE_ID));
+
+                putSessionScope(AttributeConst.LOGIN_USE, uv);
+
                 //一覧画面にリダイレクト
-                redirect(ForwardConst.ACT_USE, ForwardConst.CMD_INDEX);
+                redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
             }
         }
     }
@@ -213,20 +205,22 @@ public class UserAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-/*    public void destroy() throws ServletException, IOException {
+    public void destroy() throws ServletException, IOException {
 
         //CSRF対策 tokenのチェック
         if (checkToken()) { //追記
 
             //idを条件に従業員データを論理削除する
-            service.destroy(toNumber(getRequestParam(AttributeConst.USE_ID)));
+            service.destroy(getRequestParam(AttributeConst.USE_ID));
 
             //セッションに削除完了のフラッシュメッセージを設定
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+
+            removeSessionScope(AttributeConst.LOGIN_USE);
 
             //一覧画面にリダイレクト
             redirect(ForwardConst.ACT_USE, ForwardConst.CMD_INDEX);
         }
     }
-*/
+
 }

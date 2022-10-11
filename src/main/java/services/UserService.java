@@ -73,7 +73,7 @@ public class UserService extends ServiceBase {
      * @param id
      * @return 取得データのインスタンス
      */
-    public UserView findOne(int id) {
+    public UserView findOne(String id) {
         User e = findOneInternal(id);
         return UserConverter.toView(e);
     }
@@ -127,19 +127,19 @@ public class UserService extends ServiceBase {
      * @param pepper pepper文字列
      * @return バリデーションや更新処理中に発生したエラーのリスト
      */
-  /*  public List<String> update(UserView ev, String pepper) {
+    public List<String> update(UserView ev, String pepper) {
 
         //idを条件に登録済みの従業員情報を取得する
-        UserView savedEmp = findOne(ev.getId());
+        UserView savedUse = findOne(ev.getId());
 
         boolean validateId = false;
-        if (!savedEmp.getId().equals(ev.getId())) {
+        if (!savedUse.getId().equals(ev.getId())) {
             //社員番号を更新する場合
 
             //社員番号についてのバリデーションを行う
             validateId = true;
             //変更後の社員番号を設定する
-            savedEmp.setId(ev.getId());
+            savedUse.setId(ev.getId());
         }
 
         boolean validatePass = false;
@@ -150,22 +150,22 @@ public class UserService extends ServiceBase {
             validatePass = true;
 
             //変更後のパスワードをハッシュ化し設定する
-            savedEmp.setPassword(
+            savedUse.setPassword(
                     EncryptUtil.getPasswordEncrypt(ev.getPassword(), pepper));
         }
 
-        savedEmp.setName(ev.getName()); //変更後の氏名を設定する
+        savedUse.setName(ev.getName()); //変更後の氏名を設定する
 
         //更新日時に現在時刻を設定する
         LocalDateTime today = LocalDateTime.now();
-        savedEmp.setUpdatedAt(today);
+        savedUse.setUpdatedAt(today);
 
         //更新内容についてバリデーションを行う
-        List<String> errors = UserValidator.validate(this, savedEmp, validateId, validatePass);
+        List<String> errors = UserValidator.validate(this, savedUse, validateId, validatePass);
 
         //バリデーションエラーがなければデータを更新する
         if (errors.size() == 0) {
-            update(savedEmp);
+            update(savedUse);
         }
 
         //エラーを返却（エラーがなければ0件の空リスト）
@@ -176,20 +176,20 @@ public class UserService extends ServiceBase {
      * idを条件に従業員データを論理削除する
      * @param id
      */
-/*    public void destroy(Integer id) {
+    public void destroy(String id) {
 
         //idを条件に登録済みの従業員情報を取得する
-        UserView savedEmp = findOne(id);
+        UserView savedUse = findOne(id);
 
         //更新日時に現在時刻を設定する
         LocalDateTime today = LocalDateTime.now();
-        savedEmp.setUpdatedAt(today);
+        savedUse.setUpdatedAt(today);
 
         //論理削除フラグをたてる
-        savedEmp.setDeleteFlag(JpaConst.USE_DEL_TRUE);
+        savedUse.setDeleteFlag(JpaConst.USE_DEL_TRUE);
 
         //更新処理を行う
-        update(savedEmp);
+        update(savedUse);
 
     }
 
@@ -222,7 +222,7 @@ public class UserService extends ServiceBase {
      * @param id
      * @return 取得データのインスタンス
      */
-    private User findOneInternal(int id) {
+    private User findOneInternal(String id) {
         User e = em.find(User.class, id);
 
         return e;
@@ -245,7 +245,7 @@ public class UserService extends ServiceBase {
      * 従業員データを更新する
      * @param ev 画面から入力された従業員の登録内容
      */
- /*   private void update(UserView ev) {
+    private void update(UserView ev) {
 
         em.getTransaction().begin();
         User e = findOneInternal(ev.getId());
@@ -253,5 +253,5 @@ public class UserService extends ServiceBase {
         em.getTransaction().commit();
 
     }
-*/
+
 }

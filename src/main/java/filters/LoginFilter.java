@@ -60,8 +60,18 @@ public class LoginFilter implements Filter {
 
             if (ev == null) {
                 //未ログイン
+                if (ForwardConst.ACT_USE.getValue().equals(action) && ForwardConst.CMD_NEW.getValue().equals(command)) {
+                    /*((HttpServletResponse) response).sendRedirect(
+                            contextPath
+                                    + "?action=" + ForwardConst.ACT_USE.getValue()
+                                    + "&command=" + ForwardConst.CMD_NEW.getValue());*/
+                }
 
-                if (!(ForwardConst.ACT_AUTH.getValue().equals(action)
+                else if (ForwardConst.ACT_USE.getValue().equals(action) && ForwardConst.CMD_CREATE.getValue().equals(command)) {
+
+                }
+
+                else if (!(ForwardConst.ACT_AUTH.getValue().equals(action)
                         && (ForwardConst.CMD_SHOW_LOGIN.getValue().equals(command)
                                 || ForwardConst.CMD_LOGIN.getValue().equals(command)))) {
 
