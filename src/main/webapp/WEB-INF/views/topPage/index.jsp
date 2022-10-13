@@ -10,6 +10,5 @@
 
         <h2>${sessionScope.login_user.name} さんのトップページ</h2>
 
-        <p><a href="<c:url value='?action=${actPos}&command=${commNew}' />">投稿する</a></p>
     </c:param>
 </c:import>

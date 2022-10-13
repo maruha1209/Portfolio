@@ -118,10 +118,10 @@ public class UserAction extends ActionBase {
      */
     public void show() throws ServletException, IOException {
 
-            putRequestScope(AttributeConst.LOGIN_USE, getSessionScope(AttributeConst.LOGIN_USE));
+           putRequestScope(AttributeConst.USER, getSessionScope(AttributeConst.LOGIN_USE));
 
-            //詳細画面を表示
-            forward(ForwardConst.FW_USE_SHOW);
+           //詳細画面を表示
+           forward(ForwardConst.FW_USE_SHOW);
 
     }
 

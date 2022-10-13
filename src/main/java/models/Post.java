@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import constants.JpaConst;
@@ -24,6 +26,20 @@ import lombok.Setter;
  *
  */
 @Table(name = JpaConst.TABLE_POS)
+@NamedQueries({
+    @NamedQuery(
+            name = JpaConst.Q_POS_GET_ALL,
+            query = JpaConst.Q_POS_GET_ALL_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_POS_COUNT,
+            query = JpaConst.Q_POS_COUNT_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_POS_GET_ALL_MINE,
+            query = JpaConst.Q_POS_GET_ALL_MINE_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_POS_COUNT_ALL_MINE,
+            query = JpaConst.Q_POS_COUNT_ALL_MINE_DEF)
+})
 
 @Getter
 @Setter

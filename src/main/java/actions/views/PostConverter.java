@@ -20,7 +20,7 @@ public class PostConverter {
 
         return new Post(
                 uv.getId(),
-                uv.getUser(),
+                UserConverter.toModel(uv.getUser()),
                 uv.getContent(),
                 uv.getCreatedAt(),
                 uv.getUpdatedAt()
@@ -41,7 +41,7 @@ public class PostConverter {
 
         return new PostView(
                 u.getId(),
-                u.getUser(),
+                UserConverter.toView(u.getUser()),
                 u.getContent(),
                 u.getCreatedAt(),
                 u.getUpdatedAt()
@@ -70,7 +70,7 @@ public class PostConverter {
      */
     public static void copyViewToModel(Post u, PostView uv) {
         u.setId(uv.getId());
-        u.setUser(uv.getUser());
+        u.setUser(UserConverter.toModel(uv.getUser()));
         u.setContent(uv.getContent());
         u.setCreatedAt(uv.getCreatedAt());
         u.setUpdatedAt(uv.getUpdatedAt());

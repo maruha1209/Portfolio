@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import models.User;
 
 /**
  * 投稿情報について画面の入力値・出力値を扱うViewモデル
@@ -26,7 +25,7 @@ public class PostView {
     /**
      * 投稿したユーザー
      */
-    private User user;
+    private UserView user;
 
     /**
      * 投稿内容

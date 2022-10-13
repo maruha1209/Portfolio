@@ -11,26 +11,26 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
 
-        <h2><c:out value="${login_user.name}"/> さんのユーザー情報 詳細ページ</h2>
+        <h2><c:out value="${user.name}"/> さんのユーザー情報 詳細ページ</h2>
 
         <table>
             <tbody>
                 <tr>
                     <th>ユーザーID</th>
-                    <td><c:out value="${login_user.id}" /></td>
+                    <td><c:out value="${user.id}" /></td>
                 </tr>
                 <tr>
                     <th>ユーザーネーム</th>
-                    <td><c:out value="${login_user.name}" /></td>
+                    <td><c:out value="${user.name}" /></td>
                 </tr>
                 <tr>
                     <th>登録日時</th>
-                    <fmt:parseDate value="${login_user.createdAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="createDay" type="date" />
+                    <fmt:parseDate value="${user.createdAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="createDay" type="date" />
                     <td><fmt:formatDate value="${createDay}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                 </tr>
                 <tr>
                     <th>更新日時</th>
-                    <fmt:parseDate value="${login_user.updatedAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="updateDay" type="date" />
+                    <fmt:parseDate value="${user.updatedAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="updateDay" type="date" />
                     <td><fmt:formatDate value="${updateDay}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                 </tr>
             </tbody>
