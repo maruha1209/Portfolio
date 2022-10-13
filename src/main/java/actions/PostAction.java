@@ -158,7 +158,7 @@ public class PostAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-/*    public void show() throws ServletException, IOException {
+    public void show() throws ServletException, IOException {
 
         //idを条件に日報データを取得する
         PostView rv = service.findOne(toNumber(getRequestParam(AttributeConst.POS_ID)));
@@ -181,7 +181,7 @@ public class PostAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-/*    public void edit() throws ServletException, IOException {
+    public void edit() throws ServletException, IOException {
 
         //idを条件に日報データを取得する
         PostView rv = service.findOne(toNumber(getRequestParam(AttributeConst.POS_ID)));

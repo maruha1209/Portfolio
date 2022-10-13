@@ -24,8 +24,8 @@
         <table id="post_list">
             <tbody>
                 <tr>
-                    <th class="post_name">氏名</th>
-                    <th class="post_date">日付</th>
+                    <th class="post_name">ユーザーネーム</th>
+                    <th class="post_date">投稿日</th>
                     <th class="post_content">本文</th>
                     <th class="post_action">操作</th>
 
@@ -35,7 +35,8 @@
                     <fmt:parseDate value="${post.createdAt}" pattern="yyyy-MM-dd" var="postDay" type="date" />
 
                     <tr class="row${status.count % 2}">
-                        <td class="post_name"><c:out value="${post.user.name}" /></td>
+                        <td class="post_name"><a href="<c:url value='?action=${actPos}&command=${commIdx}&id=${post.user.id}' />">
+                        <c:out value="${post.user.name}" /></a></td>
                         <td class="post_date"><fmt:formatDate value='${postDay}' pattern='yyyy-MM-dd' /></td>
                         <td class="post_content"><c:out value="${post.content}" /></td>
                         <td class="post_action"><a href="<c:url value='?action=${actPos}&command=${commShow}&id=${post.id}' />">詳細を見る</a></td>
