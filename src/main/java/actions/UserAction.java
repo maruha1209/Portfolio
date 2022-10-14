@@ -133,7 +133,7 @@ public class UserAction extends ActionBase {
     public void edit() throws ServletException, IOException {
 
 
-            //idを条件に従業員データを取得する
+            //ログインユーザーを取得
             UserView ev = getSessionScope(AttributeConst.LOGIN_USE);
 
             if (ev == null || ev.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {

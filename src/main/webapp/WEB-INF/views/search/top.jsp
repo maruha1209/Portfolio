@@ -24,8 +24,8 @@
         </form>
 
         <form method="POST" action="<c:url value='?action=${actSch}&command=${commSpos}' />">
-            <label for="${AttributeConst.SCH_POS.getValue()}">ツイート検索</label><br />
-            <input type="text" name="${AttributeConst.SCH_POS.getValue()}" id="${AttributeConst.SCH_POS.getValue()}" value="" />
+            <label for="search_posts">ツイート検索</label><br />
+            <input type="text" name="search_posts" id="search_posts" value="${search_posts}" />
             <button type="submit">検索</button>
             <br /><br />
         </form>

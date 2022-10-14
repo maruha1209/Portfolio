@@ -6,8 +6,10 @@
 <c:set var="actUse" value="${ForwardConst.ACT_USE.getValue()}" />
 <c:set var="actPos" value="${ForwardConst.ACT_POS.getValue()}" />
 <c:set var="actSch" value="${ForwardConst.ACT_SCH.getValue()}" />
+<c:set var="actFol" value="${ForwardConst.ACT_FOL.getValue()}" />
 
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
+<c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
 <c:set var="commSuse" value="${ForwardConst.CMD_SEARCH_USERS.getValue()}" />
 <c:set var="commSpos" value="${ForwardConst.CMD_SEARCH_POSTS.getValue()}" />
 
@@ -48,7 +50,7 @@
                     <tr class="row${status.count % 2}">
                         <td class="post_name"><a href="<c:url value='?action=${actPos}&command=${commIdx}&id=${user.id}' />">
                         <c:out value="${user.name}" /></a></td>
-                        <td class="post_action"><a href="<c:url value='?action=${actPos}&command=${commIdx}&id=${user.id}' />">詳細を見る</a></td>
+                        <td class="post_action"><a href="<c:url value='?action=${actFol}&command=${commCrt}&id=${user.id}' />">フォローする</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

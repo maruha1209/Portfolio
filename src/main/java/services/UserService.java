@@ -13,7 +13,7 @@ import models.validators.UserValidator;
 import utils.EncryptUtil;
 
 /**
- * 従業員テーブルの操作に関わる処理を行うクラス
+ * ユーザーテーブルの操作に関わる処理を行うクラス
  */
 public class UserService extends ServiceBase {
 
@@ -56,8 +56,8 @@ public class UserService extends ServiceBase {
     }
 
     /**
-     * 従業員テーブルのデータの件数を取得し、返却する
-     * @return 従業員テーブルのデータの件数
+     * ユーザーテーブルのデータの件数を取得し、返却する
+     * @return ユーザーテーブルのデータの件数
      */
     public long countAll() {
         long empCount = (long) em.createNamedQuery(JpaConst.Q_USE_COUNT, Long.class)
@@ -79,7 +79,7 @@ public class UserService extends ServiceBase {
             //パスワードのハッシュ化
             String pass = EncryptUtil.getPasswordEncrypt(plainPass, pepper);
 
-            //社員番号とハッシュ化済パスワードを条件に未削除の従業員を1件取得する
+            //社員番号とハッシュ化済パスワードを条件に未削除のユーザーを1件取得する
             e = em.createNamedQuery(JpaConst.Q_USE_GET_BY_ID_AND_PASS, User.class)
                     .setParameter(JpaConst.JPQL_PARM_ID, id)
                     .setParameter(JpaConst.JPQL_PARM_PASSWORD, pass)
@@ -90,6 +90,19 @@ public class UserService extends ServiceBase {
 
         return UserConverter.toView(e);
 
+    }
+
+    /**
+     * idを条件に取得したデータをUserViewのインスタンスで返却する
+     * @param id
+     * @return 取得データのインスタンス
+
+    public UserView findId(String id) {
+        User u = (User) em.createQuery("SELECT r FROM User AS r WHERE r.id = :id")
+                .setParameter("id", id)
+                .getSingleResult();
+
+        return UserConverter.toView(u);
     }
 
     /**
@@ -109,7 +122,7 @@ public class UserService extends ServiceBase {
      */
     public long countById(String id) {
 
-        //指定した社員番号を保持する従業員の件数を取得する
+        //指定した社員番号を保持するユーザーの件数を取得する
         long employees_count = (long) em.createNamedQuery(JpaConst.Q_USE_COUNT_REGISTERED_BY_ID, Long.class)
                 .setParameter(JpaConst.JPQL_PARM_ID, id)
                 .getSingleResult();
@@ -117,8 +130,8 @@ public class UserService extends ServiceBase {
     }
 
     /**
-     * 画面から入力された従業員の登録内容を元にデータを1件作成し、従業員テーブルに登録する
-     * @param ev 画面から入力された従業員の登録内容
+     * 画面から入力されたユーザーの登録内容を元にデータを1件作成し、ユーザーテーブルに登録する
+     * @param ev 画面から入力されたユーザーの登録内容
      * @param pepper pepper文字列
      * @return バリデーションや登録処理中に発生したエラーのリスト
      */
@@ -146,14 +159,14 @@ public class UserService extends ServiceBase {
     }
 
     /**
-     * 画面から入力された従業員の更新内容を元にデータを1件作成し、従業員テーブルを更新する
-     * @param ev 画面から入力された従業員の登録内容
+     * 画面から入力されたユーザーの更新内容を元にデータを1件作成し、ユーザーテーブルを更新する
+     * @param ev 画面から入力されたユーザーの登録内容
      * @param pepper pepper文字列
      * @return バリデーションや更新処理中に発生したエラーのリスト
      */
     public List<String> update(UserView ev, String pepper) {
 
-        //idを条件に登録済みの従業員情報を取得する
+        //idを条件に登録済みのユーザー情報を取得する
         UserView savedUse = findOne(ev.getId());
 
         boolean validateId = false;
@@ -197,12 +210,12 @@ public class UserService extends ServiceBase {
     }
 
     /**
-     * idを条件に従業員データを論理削除する
+     * idを条件にユーザーデータを論理削除する
      * @param id
      */
     public void destroy(String id) {
 
-        //idを条件に登録済みの従業員情報を取得する
+        //idを条件に登録済みのユーザー情報を取得する
         UserView savedUse = findOne(id);
 
         //更新日時に現在時刻を設定する
@@ -253,8 +266,8 @@ public class UserService extends ServiceBase {
     }
 
     /**
-     * 従業員データを1件登録する
-     * @param ev 従業員データ
+     * ユーザーデータを1件登録する
+     * @param ev ユーザーデータ
      * @return 登録結果(成功:true 失敗:false)
      */
     private void create(UserView ev) {
@@ -266,8 +279,8 @@ public class UserService extends ServiceBase {
     }
 
     /**
-     * 従業員データを更新する
-     * @param ev 画面から入力された従業員の登録内容
+     * ユーザーデータを更新する
+     * @param ev 画面から入力されたユーザーの登録内容
      */
     private void update(UserView ev) {
 
