@@ -12,6 +12,7 @@ public enum ForwardConst {
     ACT_POS("Post"),
     ACT_AUTH("Auth"),
     ACT_TOP("Top"),
+    ACT_SCH("Search"),
 
     //command
     CMD("command"),
@@ -27,6 +28,9 @@ public enum ForwardConst {
     CMD_UPDATE("update"),
     CMD_DESTROY("destroy"),
     CMD_USERINDEX("userIndex"),
+    CMD_TOP("top"),
+    CMD_SEARCH_USERS("searchUsers"),
+    CMD_SEARCH_POSTS("searchPosts"),
 
   //jsp
     FW_ERR_UNKNOWN("error/unknown"),
@@ -41,7 +45,10 @@ public enum ForwardConst {
     FW_POS_SHOW("posts/show"),
     FW_POS_NEW("posts/new"),
     FW_POS_EDIT("posts/edit"),
-    FW_FOL_INDEX("follows/index");
+    FW_FOL_INDEX("follows/index"),
+    FW_SCH_TOP("search/top"),
+    FW_SCH_USERS("search/users"),
+    FW_SCH_POSTS("search/posts");
 
     /**
      * 文字列

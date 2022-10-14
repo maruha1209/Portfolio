@@ -12,10 +12,10 @@
 
     </div>
 </c:if>
-<!-- <fmt:parseDate value="${post.postDate}" pattern="yyyy-MM-dd" var="postDay" type="date" />
+<%--  <fmt:parseDate value="${post.postDate}" pattern="yyyy-MM-dd" var="postDay" type="date" />
 <label for="${AttributeConst.POS_DATE.getValue()}">日付</label><br />
 <input type="date" name="${AttributeConst.POS_DATE.getValue()}" id="${AttributeConst.POS_DATE.getValue()}" value="<fmt:formatDate value='${postDay}' pattern='yyyy-MM-dd' />" />
-<br /><br /> -->
+<br /><br /> --%>
 
 <label>ユーザーネーム:</label>
 <c:out value="${sessionScope.login_user.name}" />

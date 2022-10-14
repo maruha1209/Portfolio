@@ -7,11 +7,14 @@
 <c:set var="actUse" value="${ForwardConst.ACT_USE.getValue()}" />
 <c:set var="actPos" value="${ForwardConst.ACT_POS.getValue()}" />
 <c:set var="actAuth" value="${ForwardConst.ACT_AUTH.getValue()}" />
+<c:set var="actSch" value="${ForwardConst.ACT_SCH.getValue()}" />
 
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
 <c:set var="commOut" value="${ForwardConst.CMD_LOGOUT.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
+<c:set var="commTop" value="${ForwardConst.CMD_TOP.getValue()}" />
+
 
 
 <!DOCTYPE html>
@@ -30,8 +33,8 @@
             <div id="header_menu">
                 <h1><a href="<c:url value='/?action=${actTop}&command=${commIdx}' />">Tweetシステム</a></h1>&nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_user != null}">
-                    <a href="<c:url value='?action=${actPos}&command=${commNew}' />">ツイートする</a>&nbsp;
-                    <a href="<c:url value='?action=${actPos}&command=${commIdx}&id=${sessionScope.login_user.id}' />">ツイート一覧</a>&nbsp;
+                    <a href="<c:url value='?action=${actPos}&command=${commIdx}&id=${sessionScope.login_user.id}' />">ツイート機能</a>&nbsp;
+                    <a href="<c:url value='?action=${actSch}&command=${commTop}' />">検索</a>&nbsp;
                 </c:if>
             </div>
             <c:if test="${sessionScope.login_user != null}">

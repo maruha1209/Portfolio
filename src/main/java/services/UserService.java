@@ -32,6 +32,30 @@ public class UserService extends ServiceBase {
     }
 
     /**
+     * 入力されたキーワードと部分一致のユーザーを返却
+
+    public List<UserView> getSearchUsers(String sql) {
+
+        List<User> users = em.createNamedQuery(JpaConst.Q_USE_GET_ALL_SEARCH, User.class).
+                setParameter(JpaConst.JPQL_PARM_SEARCH_USERS, "%" + sql + "%")
+                .getResultList();
+
+        return UserConverter.toViewList(users);
+    }*/
+
+    /**
+     * 入力されたキーワードと部分一致のユーザーを返却
+     */
+    public List<UserView> getSearchUsers(String su) {
+
+        List<User> users = em.createQuery("SELECT a FROM User AS a WHERE a.name LIKE :search_users")
+                .setParameter("search_users", "%" + su + "%")
+                .getResultList();
+
+        return UserConverter.toViewList(users);
+    }
+
+    /**
      * 従業員テーブルのデータの件数を取得し、返却する
      * @return 従業員テーブルのデータの件数
      */

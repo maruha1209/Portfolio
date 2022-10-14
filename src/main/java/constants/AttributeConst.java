@@ -27,6 +27,10 @@ public enum AttributeConst {
     USE_PASS("password"),
     USE_NAME("name"),
 
+    //検索機能
+    SCH_USE("search_users"),
+    SCH_POS("search_posts"),
+
     //削除フラグ
     DEL_FLAG_TRUE(1),
     DEL_FLAG_FALSE(0),

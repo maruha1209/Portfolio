@@ -3,6 +3,8 @@ package actions.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import constants.AttributeConst;
+import constants.JpaConst;
 import models.Post;
 
 /**
@@ -23,8 +25,12 @@ public class PostConverter {
                 UserConverter.toModel(uv.getUser()),
                 uv.getContent(),
                 uv.getCreatedAt(),
-                uv.getUpdatedAt()
-                );
+                uv.getUpdatedAt(),
+                uv.getDeleteFlag() == null
+                ? null
+                : uv.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()
+                        ? JpaConst.USE_DEL_TRUE
+                        : JpaConst.USE_DEL_FALSE);
 
     }
 
@@ -44,8 +50,12 @@ public class PostConverter {
                 UserConverter.toView(u.getUser()),
                 u.getContent(),
                 u.getCreatedAt(),
-                u.getUpdatedAt()
-                );
+                u.getUpdatedAt(),
+                u.getDeleteFlag() == null
+                ? null
+                : u.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()
+                        ? JpaConst.USE_DEL_TRUE
+                        : JpaConst.USE_DEL_FALSE);
     }
 
     /**

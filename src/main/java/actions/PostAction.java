@@ -126,7 +126,8 @@ public class PostAction extends ActionBase {
                     ev, //ログインしている従業員を、日報作成者として登録する
                     getRequestParam(AttributeConst.POS_CONTENT),
                     null,
-                    null);
+                    null,
+                    AttributeConst.DEL_FLAG_FALSE.getIntegerValue());
 
             //日報情報登録
             List<String> errors = service.create(rv);
@@ -148,7 +149,7 @@ public class PostAction extends ActionBase {
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
 
                 //一覧画面にリダイレクト
-                redirect(ForwardConst.ACT_POS, ForwardConst.CMD_INDEX);
+                redirect(ForwardConst.ACT_POS, ForwardConst.CMD_INDEX, ev.getId());
             }
         }
     }
@@ -189,7 +190,7 @@ public class PostAction extends ActionBase {
         //セッションからログイン中の従業員情報を取得
         UserView ev = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
 
-        if (rv == null || ev.getId() != rv.getUser().getId()) {
+        if (rv == null || !ev.getId().equals(rv.getUser().getId())) {
             //該当の日報データが存在しない、または
             //ログインしている従業員が日報の作成者でない場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);

@@ -138,6 +138,20 @@ public abstract class ActionBase {
 
     }
 
+    protected void redirect(ForwardConst action, ForwardConst command, String id)
+            throws ServletException, IOException {
+
+        //URLを構築
+        String redirectUrl = request.getContextPath() + "/?action=" + action.getValue();
+        if (command != null) {
+            redirectUrl = redirectUrl + "&command=" + command.getValue() + "&id=" + id;
+        }
+
+        //URLへリダイレクト
+        response.sendRedirect(redirectUrl);
+
+    }
+
     /**
      * セッションIDを取得する
      * @return セッションID

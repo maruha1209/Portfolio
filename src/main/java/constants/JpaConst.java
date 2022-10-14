@@ -35,8 +35,8 @@ public interface JpaConst {
     String TABLE_FOL = "follows"; //テーブル名
     //フォローテーブルカラム
     String FOL_COL_ID = "id"; //id
-    String FOL_COL_FOLLOWER_USE = "follower"; //フォローしたユーザーのid
-    String FOL_COL_FOLLOWEE_USE = "followee"; //フォローされたユーザーのid
+    String FOL_COL_FOLLOWER_USE = "follower"; //フォローしたユーザー
+    String FOL_COL_FOLLOWEE_USE = "followee"; //フォローされたユーザー
     String FOL_COL_CREATED_AT = "created_at"; //登録日時
     String FOL_COL_UPDATED_AT = "updated_at"; //更新日時
 
@@ -49,7 +49,9 @@ public interface JpaConst {
     String JPQL_PARM_ID = "id"; //社員番号
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_USER = "user"; //従業員
-    String JPQL_PARM_FOLLOW = "follow";
+    String JPQL_PARM_FOLLOWER = "follower";
+    String JPQL_PARM_FOLLOWEE = "followee";
+    String JPQL_PARM_SEARCH_USERS = "search_users";
 
     //NamedQueryの nameとquery
     //全ての従業員をidの降順に取得する
@@ -78,9 +80,11 @@ public interface JpaConst {
     String Q_POS_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Post AS r WHERE r.user = :" + JPQL_PARM_USER;
     //全てのフォローデータをidの降順に取得する
     String Q_FOL_GET_ALL = ENTITY_FOL + ".getAll";
-  //指定した従業員のフォローデータを全件idの降順で取得する
-    String Q_FOL_GET_ALL_MINE = ENTITY_FOL + ".getAllMine";
-    String Q_FOL_GET_ALL_MINE_DEF = "SELECT r FROM Follow AS r WHERE r.follow = :" + JPQL_PARM_FOLLOW + " ORDER BY r.id DESC";
-
+    //指定した従業員のフォローデータを全件idの降順で取得する
+    //String Q_FOL_GET_ALL_MINE = ENTITY_FOL + ".getAllMine";
+    //String Q_FOL_GET_ALL_MINE_DEF = "SELECT r FROM Follow AS r WHERE r.follow = :" + JPQL_PARM_FOLLOW + " ORDER BY r.id DESC";
+    //指定したキーワードを含むユーザーを全件取得する
+    String Q_USE_GET_ALL_SEARCH = ENTITY_USE + ".getAllSearchUsers";
+    String Q_USE_GET_ALL_SEARCH＿DEF = "SELECT a FROM User AS a WHERE a.name LIKE :" + JPQL_PARM_SEARCH_USERS;
 
 }

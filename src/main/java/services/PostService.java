@@ -45,6 +45,18 @@ public class PostService extends ServiceBase {
     }
 
     /**
+     * 入力されたキーワードと部分一致の投稿を返却
+     */
+    public List<PostView> getSearchPosts(String sp) {
+
+        List<Post> posts = em.createQuery("SELECT a FROM Post AS a WHERE a.content LIKE :search_posts")
+                .setParameter("search_posts", "%" + sp + "%")
+                .getResultList();
+
+        return PostConverter.toViewList(posts);
+    }
+
+    /**
      * 指定した従業員が作成した日報データの件数を取得し、返却する
      * @param employee
      * @return 日報データの件数
