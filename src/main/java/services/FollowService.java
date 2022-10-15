@@ -1,6 +1,8 @@
 package services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import actions.views.FollowConverter;
 import actions.views.FollowView;
@@ -14,22 +16,62 @@ public class FollowService extends ServiceBase{
      * @follower フォローする側のユーザー
      * @followee フォローされる側のユーザー
      */
-    public Boolean validateFollow(UserView follower, UserView followee) {
+    public Long followCount(UserView follower, UserView followee) {
 
-        Object q = em.createQuery("SELECT a FROM Follow AS a WHERE a.follower = :fer AND a.followee = :fee")
+        Long f = (Long) em.createQuery("SELECT COUNT(a) FROM Follow AS a WHERE a.follower = :fer AND a.followee = :fee")
                 .setParameter("fer", UserConverter.toModel(follower))
                 .setParameter("fee", UserConverter.toModel(followee))
                 .getSingleResult();
 
-        if (q != null) {
+            return f;
 
-            return true;
+    }
 
-        } else {
+    /**
+     * 表示するユーザーがフォロー済みかチェックする
+     */
+    public boolean followCheck(UserView follower, UserView followee) {
 
-            return false;
+            Long f = (Long) em.createQuery("SELECT COUNT(a) FROM Follow AS a WHERE a.follower = :fer AND a.followee = :fee")
+                    .setParameter("fer", UserConverter.toModel(follower))
+                    .setParameter("fee", UserConverter.toModel(followee))
+                    .getSingleResult();
+
+            if (f >= 1) {
+
+                return true;
+
+            } else {
+
+                return false;
+
+            }
+
+    }
+
+    /**
+     * 一覧に表示するユーザーがフォロー済みかチェックする
+     */
+    public List<Integer> followsCheck(UserView follower, List<UserView> followees) {
+
+        List<Integer> fc = new ArrayList<Integer>();
+
+        for(UserView followee : followees) {
+
+            Long f = (Long) em.createQuery("SELECT COUNT(a) FROM Follow AS a WHERE a.follower = :fer AND a.followee = :fee")
+                    .setParameter("fer", UserConverter.toModel(follower))
+                    .setParameter("fee", UserConverter.toModel(followee))
+                    .getSingleResult();
+
+            if (f >= 1) {
+                fc.add(1);
+            } else if (f == 0 || f == null) {
+                fc.add(0);
+            }
 
         }
+
+        return fc;
 
     }
 

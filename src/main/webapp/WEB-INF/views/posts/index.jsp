@@ -21,6 +21,18 @@
             <p><a href="<c:url value='?action=${actPos}&command=${commNew}' />">新しくツイートする</a></p>
         </c:if>
 
+        <c:if test="${user.id != sessionScope.login_user.id}">
+            <c:if test="${is_follow == true}">
+                <!-- フォロー（is_follow＝true）している場合 -->
+                <button type="submit">フォロー解除</button>
+            </c:if>
+            <c:if test="${is_follow == false}">
+                <!-- フォロー（is_follow＝false）してない場合 -->
+                <button type="submit">フォロー</button>
+            </c:if>
+        </c:if>
+
+
         <table id="post_list">
             <tbody>
                 <tr>

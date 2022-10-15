@@ -46,7 +46,13 @@ public class FollowAction extends ActionBase{
             //パラメータからユーザー情報を取得
             UserView fu = us.findOne(getRequestParam(AttributeConst.USE_ID));
 
-            if (service.validateFollow(ru, fu)) {
+            Long f = service.followCount(ru, fu);
+
+            if (f != 0 || f != null || ru.getId().equals(fu.getId())) {
+
+                //セッションにフラッシュメッセージを設定
+                putSessionScope(AttributeConst.FLUSH, "フォロー済みのユーザーです");
+
 
                 //すでにフォロー済みの場合
                 forward(ForwardConst.FW_ERR_UNKNOWN);
@@ -69,7 +75,7 @@ public class FollowAction extends ActionBase{
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
 
             //一覧画面にリダイレクト
-            redirect(ForwardConst.ACT_SCH, ForwardConst.CMD_TOP);
+            forward(ForwardConst.FW_SCH_USERS);
 
     }
 

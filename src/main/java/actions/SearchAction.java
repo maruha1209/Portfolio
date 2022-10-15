@@ -41,6 +41,8 @@ public class SearchAction extends ActionBase{
 
     public void searchUsers() throws ServletException, IOException {
 
+        //FollowService fs = new FollowService();
+
         //String su = getRequestParam(AttributeConst.SCH_USE);
         String su = request.getParameter("search_users");
 
@@ -50,6 +52,12 @@ public class SearchAction extends ActionBase{
         List<UserView> users = service.getSearchUsers(su);
 
         request.setAttribute("users", users);
+
+        //UserView lu = getSessionScope(AttributeConst.LOGIN_USE);
+
+        //List<Integer> fc = fs.followCheck(lu, users);
+
+        //request.setAttribute("is_follows", fc);
 
         //検索一覧を表示
         forward(ForwardConst.FW_SCH_USERS);

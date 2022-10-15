@@ -219,7 +219,7 @@ public class UserAction extends ActionBase {
             removeSessionScope(AttributeConst.LOGIN_USE);
 
             //一覧画面にリダイレクト
-            redirect(ForwardConst.ACT_USE, ForwardConst.CMD_INDEX);
+            redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
         }
     }
 

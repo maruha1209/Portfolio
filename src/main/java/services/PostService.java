@@ -49,7 +49,7 @@ public class PostService extends ServiceBase {
      */
     public List<PostView> getSearchPosts(String sp) {
 
-        List<Post> posts = em.createQuery("SELECT a FROM Post AS a WHERE a.content LIKE :search_posts")
+        List<Post> posts = em.createQuery("SELECT a FROM Post AS a WHERE a.content LIKE :search_posts AND a.deleteFlag = 0")
                 .setParameter("search_posts", "%" + sp + "%")
                 .getResultList();
 
@@ -177,5 +177,27 @@ public class PostService extends ServiceBase {
         em.getTransaction().commit();
 
     }
+
+    /**
+     * idを条件に投稿データを論理削除する
+     * @param id
+     */
+    public void destroy(int id) {
+
+        //idを条件に登録済みの投稿情報を取得する
+        PostView savedUse = findOne(id);
+
+        //更新日時に現在時刻を設定する
+        LocalDateTime today = LocalDateTime.now();
+        savedUse.setUpdatedAt(today);
+
+        //論理削除フラグをたてる
+        savedUse.setDeleteFlag(JpaConst.USE_DEL_TRUE);
+
+        //更新処理を行う
+        update(savedUse);
+
+    }
+
 
 }

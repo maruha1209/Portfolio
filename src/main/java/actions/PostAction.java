@@ -10,6 +10,7 @@ import actions.views.UserView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.MessageConst;
+import services.FollowService;
 import services.PostService;
 import services.UserService;
 
@@ -67,6 +68,11 @@ public class PostAction extends ActionBase {
         //putRequestScope(AttributeConst.POS_COUNT, reportsCount); //全ての日報データの件数
         //putRequestScope(AttributeConst.PAGE, page); //ページ数
         //putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
+
+        //ページのユーザーがフォロー済みかを確認しリクエストスコープにセット
+        FollowService fs = new FollowService();
+
+        request.setAttribute("is_follow", fs.followCheck(getSessionScope(AttributeConst.LOGIN_USE), ev));
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);
@@ -164,7 +170,7 @@ public class PostAction extends ActionBase {
         //idを条件に日報データを取得する
         PostView rv = service.findOne(toNumber(getRequestParam(AttributeConst.POS_ID)));
 
-        if (rv == null) {
+        if (rv == null || rv.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
             //該当の日報データが存在しない場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
@@ -250,4 +256,28 @@ public class PostAction extends ActionBase {
             }
         }
     }*/
+
+    /**
+     * 論理削除を行う
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void destroy() throws ServletException, IOException {
+
+        //CSRF対策 tokenのチェック
+        if (checkToken()) { //追記
+
+            //idを条件に投稿データを論理削除する
+            service.destroy(toNumber(getRequestParam(AttributeConst.POS_ID)));
+
+            //セッションに削除完了のフラッシュメッセージを設定
+            putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+
+            removeSessionScope(AttributeConst.LOGIN_USE);
+
+            //一覧画面にリダイレクト
+            redirect(ForwardConst.ACT_POS, ForwardConst.CMD_INDEX);
+        }
+
+    }
 }

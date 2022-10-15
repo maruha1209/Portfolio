@@ -33,16 +33,16 @@
         </table>
 
         <c:if test="${sessionScope.login_user.id == post.user.id}">
-            <p>
+<!--        <p>
                 <a href="<c:url value='?action=${actPos}&command=${commEdt}&id=${post.id}' />">このツイートを編集する</a>
-            </p>
-<!--              <p>
-                <a href="<c:url value='?action=${actPos}&command=${commDes}&id=${post.id}' />">このツイートを削除する</a>
             </p> -->
+            <p>
+                <a href="<c:url value='?action=${actPos}&command=${commDes}&id=${post.id}' />">このツイートを削除する</a>
+            </p>
         </c:if>
 
         <p>
-            <a href="<c:url value='?action=${actPos}&command=${commIdx}' />">一覧に戻る</a>
+            <a href="<c:url value='?action=${actPos}&command=${commIdx}&id=${post.user.id}' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>

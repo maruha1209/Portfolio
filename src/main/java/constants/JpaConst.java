@@ -74,7 +74,7 @@ public interface JpaConst {
     String Q_POS_COUNT_DEF = "SELECT COUNT(r) FROM Post AS r";
     //指定した従業員が作成した日報を全件idの降順で取得する
     String Q_POS_GET_ALL_MINE = ENTITY_POS + ".getAllMine";
-    String Q_POS_GET_ALL_MINE_DEF = "SELECT r FROM Post AS r WHERE r.user = :" + JPQL_PARM_USER + " ORDER BY r.id DESC";
+    String Q_POS_GET_ALL_MINE_DEF = "SELECT r FROM Post AS r WHERE r.deleteFlag = 0 AND r.user = :" + JPQL_PARM_USER + " ORDER BY r.id DESC";
     //指定した従業員が作成した日報の件数を取得する
     String Q_POS_COUNT_ALL_MINE = ENTITY_POS + ".countAllMine";
     String Q_POS_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Post AS r WHERE r.user = :" + JPQL_PARM_USER;

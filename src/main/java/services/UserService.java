@@ -48,7 +48,7 @@ public class UserService extends ServiceBase {
      */
     public List<UserView> getSearchUsers(String su) {
 
-        List<User> users = em.createQuery("SELECT a FROM User AS a WHERE a.name LIKE :search_users")
+        List<User> users = em.createQuery("SELECT a FROM User AS a WHERE a.name LIKE :search_users AND a.deleteFlag = 0")
                 .setParameter("search_users", "%" + su + "%")
                 .getResultList();
 
