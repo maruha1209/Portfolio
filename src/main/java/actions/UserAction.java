@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import actions.views.UserView;
 import constants.AttributeConst;
 import constants.ForwardConst;
+import constants.JpaConst;
 import constants.MessageConst;
 import constants.PropertyConst;
 import services.UserService;
@@ -35,7 +36,7 @@ public class UserAction extends ActionBase {
      * 一覧画面を表示する
      * @throws ServletException
      * @throws IOException
-
+    */
     public void index() throws ServletException, IOException {
 
             //指定されたページ数の一覧画面に表示するデータを取得

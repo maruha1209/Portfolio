@@ -13,6 +13,9 @@ public enum AttributeConst {
     TOKEN("_token"),
     ERR("errors"),
 
+    PAGE("page"),
+    MAX_ROW("maxRow"),
+
     //ログイン中のユーザー
     LOGIN_USE("login_user"),
 

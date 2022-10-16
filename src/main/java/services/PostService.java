@@ -65,7 +65,7 @@ public class PostService extends ServiceBase {
         List<Post> posts = new ArrayList<Post>();
 
 
-            posts = em.createQuery("SELECT p FROM Post p INNER JOIN Follow f ON p.user = f.follower WHERE  f.follower = :loginUser ORDER BY p.id DESC")
+            posts = em.createQuery("SELECT p FROM Post p LEFT JOIN Follow f ON p.user = f.followee AND f.follower = :loginUser WHERE p.user = :loginUser OR f.follower IS NOT NULL ORDER BY p.id DESC")
                     .setParameter("loginUser", UserConverter.toModel(loginUser))
                     .getResultList();
 

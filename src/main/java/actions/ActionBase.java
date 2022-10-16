@@ -48,6 +48,19 @@ public abstract class ActionBase {
     public abstract void process() throws ServletException, IOException;
 
     /**
+     * リクエストから表示を要求されているページ数を取得し、返却する
+     * @return 要求されているページ数(要求がない場合は1)
+     */
+    protected int getPage() {
+        int page;
+        page = toNumber(request.getParameter(AttributeConst.PAGE.getValue()));
+        if (page == Integer.MIN_VALUE) {
+            page = 1;
+        }
+        return page;
+    }
+
+    /**
      * パラメータのcommandの値に該当するメソッドを実行する
      * @throws ServletException
      * @throws IOException

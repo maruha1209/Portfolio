@@ -39,6 +39,7 @@
                     <a href="<c:url value='?action=${actFol}&command=${commFridx}&id=${sessionScope.login_user.id}' />">フォロー</a>&nbsp;
                     <a href="<c:url value='?action=${actFol}&command=${commFeidx}&id=${sessionScope.login_user.id}' />">フォロワー</a>&nbsp;
                     <a href="<c:url value='?action=${actPos}&command=${commIdx}&id=${sessionScope.login_user.id}' />">ツイート機能</a>&nbsp;
+                    <a href="<c:url value='?action=${actUse}&command=${commIdx}' />">ユーザー一覧</a>&nbsp;
                     <a href="<c:url value='?action=${actSch}&command=${commTop}' />">検索</a>&nbsp;
                 </c:if>
             </div>
