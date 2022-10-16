@@ -60,17 +60,15 @@ public class PostService extends ServiceBase {
     /**
      * 指定した複数のユーザーの投稿をID順にして全取得
      */
-    public List<PostView> getFollowPosts(List<UserView> users) {
+    public List<PostView> getFollowPosts(UserView loginUser) {
 
         List<Post> posts = new ArrayList<Post>();
 
-        for(UserView user : users) {
 
-            posts = em.createQuery("SELECT r FROM Post AS r WHERE r.deleteFlag = 0 AND r.user = :user")
-                    .setParameter("user", UserConverter.toModel(user))
+            posts = em.createQuery("SELECT p FROM Post p INNER JOIN Follow f ON p.user = f.follower WHERE  f.follower = :loginUser ORDER BY p.id DESC")
+                    .setParameter("loginUser", UserConverter.toModel(loginUser))
                     .getResultList();
 
-        }
 
         return PostConverter.toViewList(posts);
     }

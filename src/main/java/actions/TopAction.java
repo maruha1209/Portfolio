@@ -1,18 +1,14 @@
 package actions;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 
-import actions.views.FollowView;
 import actions.views.PostView;
-import actions.views.UserConverter;
 import actions.views.UserView;
 import constants.AttributeConst;
 import constants.ForwardConst;
-import services.FollowService;
 import services.PostService;
 
 /**
@@ -47,23 +43,8 @@ public class TopAction extends ActionBase {
         //セッションからログイン中のユーザー情報を取得
         UserView loginUser = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
 
-        //指定のユーザーのフォローデータを取得
-        FollowService fs = new FollowService();
-        List<FollowView> fl = fs.allFollowers(loginUser);
-
-        //フォローデータのユーザー一覧を取得
-        List<UserView> users = new ArrayList<UserView>();
-
-        for(FollowView fv : fl) {
-            if (fv.getFollowee().getDeleteFlag() == 0) {
-                users.add(UserConverter.toView(fv.getFollowee()));
-            }
-        }
-        //ログインユーザーのデータも追加
-        users.add(loginUser);
-
-        //取得したユーザーの全投稿を取得
-        List<PostView> posts = service.getFollowPosts(users);
+        //ログインユーザーがフォロー中のユーザーの全投稿を取得
+        List<PostView> posts = service.getFollowPosts(loginUser);
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);

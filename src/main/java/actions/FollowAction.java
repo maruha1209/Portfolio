@@ -132,7 +132,7 @@ public class FollowAction extends ActionBase{
             //セッションからログイン中のユーザー情報を取得
             UserView ru = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
 
-          //idを条件にユーザーデータを取得する
+            //idを条件にユーザーデータを取得する
             UserService userService = new UserService();
 
             UserView fu = userService.findOne(getRequestParam(AttributeConst.USE_ID));
@@ -144,9 +144,9 @@ public class FollowAction extends ActionBase{
                 return;
             }
 
-            Long f = service.followCount(ru, fu);
+            /*Long f = service.followCount(ru, fu);
 
-            if (f >= 1 || f != null || ru.getId().equals(fu.getId())) {
+            if (f >= 1 || f != null) {
 
                 //セッションにフラッシュメッセージを設定
                 putSessionScope(AttributeConst.FLUSH, "フォロー済みのユーザーです");
@@ -155,7 +155,7 @@ public class FollowAction extends ActionBase{
                 //すでにフォロー済みの場合
                 forward(ForwardConst.FW_ERR_UNKNOWN);
 
-            }
+            } else { */
 
             //パラメータの値をもとに投稿情報のインスタンスを作成する
             FollowView fv = new FollowView(
@@ -173,7 +173,8 @@ public class FollowAction extends ActionBase{
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
 
             //一覧画面にリダイレクト
-            //redirect(ForwardConst.ACT_POS, ForwardConst.CMD_INDEX, getRequestParam(AttributeConst.USE_ID));
+            redirect(ForwardConst.ACT_POS, ForwardConst.CMD_INDEX, getRequestParam(AttributeConst.USE_ID));
+
 
 
     }
