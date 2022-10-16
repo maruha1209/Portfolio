@@ -4,9 +4,12 @@
 <%@ page import="constants.ForwardConst" %>
 
 <c:set var="actPos" value="${ForwardConst.ACT_POS.getValue()}" />
+<c:set var="actFol" value="${ForwardConst.ACT_FOL.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
+<c:set var="commDes" value="${ForwardConst.CMD_DESTROY.getValue()}" />
+<c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -21,14 +24,15 @@
             <p><a href="<c:url value='?action=${actPos}&command=${commNew}' />">新しくツイートする</a></p>
         </c:if>
 
+
         <c:if test="${user.id != sessionScope.login_user.id}">
             <c:if test="${is_follow == true}">
                 <!-- フォロー（is_follow＝true）している場合 -->
-                <button type="submit">フォロー解除</button>
+                <button type="submit" onclick="location.href='<c:url value='?action=${actFol}&command=${commDes}&id=${user.id}' />'">フォロー解除</button>
             </c:if>
             <c:if test="${is_follow == false}">
                 <!-- フォロー（is_follow＝false）してない場合 -->
-                <button type="submit">フォロー</button>
+                <button type="submit" onclick="location.href='<c:url value='?action=${actFol}&command=${commCrt}&id=${user.id}' />'">フォロー</button>
             </c:if>
         </c:if>
 

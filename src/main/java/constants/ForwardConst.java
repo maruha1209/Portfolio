@@ -19,6 +19,8 @@ public enum ForwardConst {
     CMD("command"),
     CMD_NONE(""),
     CMD_INDEX("index"),
+    CMD_FOLLOWER_INDEX("followerIndex"),
+    CMD_FOLLOWEE_INDEX("followeeIndex"),
     CMD_SHOW("show"),
     CMD_SHOW_LOGIN("showLogin"),
     CMD_LOGIN("login"),
@@ -49,7 +51,9 @@ public enum ForwardConst {
     FW_FOL_INDEX("follows/index"),
     FW_SCH_TOP("search/top"),
     FW_SCH_USERS("search/users"),
-    FW_SCH_POSTS("search/posts");
+    FW_SCH_POSTS("search/posts"),
+    FW_FOL_FOLLOWERINDEX("follows/followerIndex"),
+    FW_FOL_FOLLOWEEINDEX("follows/followeeIndex");;
 
     /**
      * 文字列

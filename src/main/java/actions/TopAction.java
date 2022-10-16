@@ -1,12 +1,17 @@
 package actions;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
+import actions.views.FollowView;
+import actions.views.UserConverter;
 import actions.views.UserView;
 import constants.AttributeConst;
 import constants.ForwardConst;
+import services.FollowService;
 
 /**
  * トップページに関する処理を行うActionクラス
@@ -36,26 +41,22 @@ public class TopAction extends ActionBase {
      */
     public void index() throws ServletException, IOException {
 
-        // 以下追記
-
-        //セッションからログイン中の従業員情報を取得
+        //セッションからログイン中のユーザー情報を取得
         UserView loginUser = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
 
-        putRequestScope(AttributeConst.USE_NAME, loginUser.getId());
+        //指定のユーザーのフォローデータを取得
+        FollowService fs = new FollowService();
+        List<FollowView> fl = fs.allFollowers(loginUser);
 
-        /*//ログイン中の従業員が作成した日報データを、指定されたページ数の一覧画面に表示する分取得する
-        int page = getPage();
-        List<PostView> reports = service.getMinePerPage(loginUser, page);
+        //フォローデータのユーザー一覧を取得
+        List <UserView> users = new ArrayList<UserView>();
+        for(FollowView fv : fl) {
 
-        //ログイン中の従業員が作成した日報データの件数を取得
-        long myPostsCount = service.countAllMine(loginUser);
+            users.add(UserConverter.toView(fv.getFollowee()));
 
-        putRequestScope(AttributeConst.POSTS, reports); //取得した日報データ
-        //putRequestScope(AttributeConst.POS_COUNT, myPostsCount); //ログイン中の従業員が作成した日報の数
-        //putRequestScope(AttributeConst.PAGE, page); //ページ数
-        //putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
-
-        *///↑ここまで追記
+        }
+        //ログインユーザーのデータも追加
+        users.add(loginUser);
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);

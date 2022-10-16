@@ -96,7 +96,7 @@ public class UserService extends ServiceBase {
      * idを条件に取得したデータをUserViewのインスタンスで返却する
      * @param id
      * @return 取得データのインスタンス
-
+    */
     public UserView findId(String id) {
         User u = (User) em.createQuery("SELECT r FROM User AS r WHERE r.id = :id")
                 .setParameter("id", id)

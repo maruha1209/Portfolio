@@ -8,14 +8,41 @@ import actions.views.FollowConverter;
 import actions.views.FollowView;
 import actions.views.UserConverter;
 import actions.views.UserView;
+import models.Follow;
 
 public class FollowService extends ServiceBase{
+
+    /**
+     * 指定したユーザーのフォローデータを全取得
+     */
+    public List<FollowView> allFollowers(UserView follower) {
+
+        List<Follow> f = em.createQuery("SELECT a FROM Follow AS a WHERE a.follower = :fer")
+                .setParameter("fer", UserConverter.toModel(follower))
+                .getResultList();
+
+        return FollowConverter.toViewList(f);
+
+    }
+
+    /**
+     * 指定したユーザーのフォローデータを全取得
+     */
+    public List<FollowView> allFollowees(UserView user) {
+
+        List<Follow> f = em.createQuery("SELECT a FROM Follow AS a WHERE a.followee = :fee")
+                .setParameter("fee", UserConverter.toModel(user))
+                .getResultList();
+
+        return FollowConverter.toViewList(f);
+
+    }
 
     /**
      * 二つのユーザー情報を条件に既にデータが存在するかを確認する
      * @follower フォローする側のユーザー
      * @followee フォローされる側のユーザー
-     */
+    */
     public Long followCount(UserView follower, UserView followee) {
 
         Long f = (Long) em.createQuery("SELECT COUNT(a) FROM Follow AS a WHERE a.follower = :fer AND a.followee = :fee")
@@ -28,8 +55,10 @@ public class FollowService extends ServiceBase{
     }
 
     /**
-     * 表示するユーザーがフォロー済みかチェックする
-     */
+     * 二つのユーザー情報を条件に既にデータが存在するかを確認する
+     * @follower フォローする側のユーザー
+     * @followee フォローされる側のユーザー
+    */
     public boolean followCheck(UserView follower, UserView followee) {
 
             Long f = (Long) em.createQuery("SELECT COUNT(a) FROM Follow AS a WHERE a.follower = :fer AND a.followee = :fee")
@@ -89,6 +118,23 @@ public class FollowService extends ServiceBase{
     }
 
     /**
+     * 指定したフォロー情報をデータベースから削除
+     */
+    public void delete(UserView follower, UserView followee) {
+
+        Follow f = (Follow) em.createQuery("SELECT a FROM Follow AS a WHERE a.follower = :fer AND a.followee = :fee")
+                .setParameter("fer", UserConverter.toModel(follower))
+                .setParameter("fee", UserConverter.toModel(followee))
+                .getSingleResult();
+
+        em.getTransaction().begin();
+        em.remove(f);       // データ削除
+        em.getTransaction().commit();
+        em.close();
+
+    }
+
+    /**
      * ユーザーデータを1件登録する
      * @param ev ユーザーデータ
      * @return 登録結果(成功:true 失敗:false)
@@ -100,5 +146,6 @@ public class FollowService extends ServiceBase{
         em.getTransaction().commit();
 
     }
+
 
 }
