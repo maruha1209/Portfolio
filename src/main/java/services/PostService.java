@@ -1,6 +1,7 @@
 package services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import actions.views.PostConverter;
@@ -52,6 +53,24 @@ public class PostService extends ServiceBase {
         List<Post> posts = em.createQuery("SELECT a FROM Post AS a WHERE a.content LIKE :search_posts AND a.deleteFlag = 0")
                 .setParameter("search_posts", "%" + sp + "%")
                 .getResultList();
+
+        return PostConverter.toViewList(posts);
+    }
+
+    /**
+     * 指定した複数のユーザーの投稿をID順にして全取得
+     */
+    public List<PostView> getFollowPosts(List<UserView> users) {
+
+        List<Post> posts = new ArrayList<Post>();
+
+        for(UserView user : users) {
+
+            posts = em.createQuery("SELECT r FROM Post AS r WHERE r.deleteFlag = 0 AND r.user = :user")
+                    .setParameter("user", UserConverter.toModel(user))
+                    .getResultList();
+
+        }
 
         return PostConverter.toViewList(posts);
     }

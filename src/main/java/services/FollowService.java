@@ -26,7 +26,7 @@ public class FollowService extends ServiceBase{
     }
 
     /**
-     * 指定したユーザーのフォローデータを全取得
+     * 指定したユーザーのフォロワーーデータを全取得
      */
     public List<FollowView> allFollowees(UserView user) {
 

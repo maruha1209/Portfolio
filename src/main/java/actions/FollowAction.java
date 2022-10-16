@@ -53,12 +53,12 @@ public class FollowAction extends ActionBase{
         List<FollowView> fl = service.allFollowers(fu);
 
         //フォローデータのユーザー一覧を取得
-        List <UserView> users = new ArrayList<UserView>();
+        List<UserView> users = new ArrayList<UserView>();
 
         for(FollowView fv : fl) {
-
-            users.add(UserConverter.toView(fv.getFollowee()));
-
+            if (fv.getFollowee().getDeleteFlag() == 0) {
+                users.add(UserConverter.toView(fv.getFollowee()));
+            }
         }
 
         putRequestScope(AttributeConst.USERS, users);
@@ -101,9 +101,9 @@ public class FollowAction extends ActionBase{
         List <UserView> users = new ArrayList<UserView>();
 
         for(FollowView fv : fl) {
-
-            users.add(UserConverter.toView(fv.getFollower()));
-
+            if (fv.getFollower().getDeleteFlag() == 0) {
+                users.add(UserConverter.toView(fv.getFollower()));
+            }
         }
 
         putRequestScope(AttributeConst.USERS, users);

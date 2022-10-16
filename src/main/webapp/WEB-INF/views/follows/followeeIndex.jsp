@@ -32,7 +32,7 @@
                     <tr class="row${status.count % 2}">
                         <td class="user_name"><a href="<c:url value='?action=${actPos}&command=${commIdx}&id=${user.id}' />">
                         <c:out value="${user.name}" /></a></td>
-                        <td class="user_action"><a href="<c:url value='?action=${actPos}&command=${commShow}&id=${user.id}' />">詳細を見る</a></td>
+                        <td class="user_action"><a href="<c:url value='?action=${actPos}&command=${commIdx}&id=${user.id}' />">詳細を見る</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

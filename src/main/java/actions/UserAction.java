@@ -35,15 +35,30 @@ public class UserAction extends ActionBase {
      * 一覧画面を表示する
      * @throws ServletException
      * @throws IOException
-     */
-/*    public void index() throws ServletException, IOException {
 
-        List<UserView> users = service.getUserAll();
+    public void index() throws ServletException, IOException {
 
-        putRequestScope(AttributeConst.USERS, users); //取得したユーザーデータ
+            //指定されたページ数の一覧画面に表示するデータを取得
+            int page = getPage();
+            List<UserView> employees = service.getPerPage(page);
 
-      //一覧画面を表示
-        forward(ForwardConst.FW_USE_INDEX);
+            //全ての従業員データの件数を取得
+            long employeeCount = service.countAll();
+
+            putRequestScope(AttributeConst.USERS, employees); //取得した従業員データ
+            putRequestScope(AttributeConst.USE_COUNT, employeeCount); //全ての従業員データの件数
+            putRequestScope(AttributeConst.PAGE, page); //ページ数
+            putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
+
+            //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+            String flush = getSessionScope(AttributeConst.FLUSH);
+            if (flush != null) {
+                putRequestScope(AttributeConst.FLUSH, flush);
+                removeSessionScope(AttributeConst.FLUSH);
+            }
+
+            //一覧画面を表示
+            forward(ForwardConst.FW_USE_INDEX);
 
     }
 
