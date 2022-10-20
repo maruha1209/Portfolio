@@ -24,7 +24,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-    <title><c:out value="Tweetシステム" /></title>
+    <title><c:out value="Tweet Application" /></title>
     <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
     <link rel="stylesheet" href="<c:url value='/css/style.css' />">
 </head>
@@ -34,7 +34,7 @@
     <div id="wrapper">
         <div id="header">
             <div id="header_menu">
-                <h1><a href="<c:url value='/?action=${actTop}&command=${commIdx}' />">Tweetシステム</a></h1>&nbsp;&nbsp;&nbsp;
+                <h1><a href="<c:url value='/?action=${actTop}&command=${commIdx}' />">Tweet Application</a></h1>&nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_user != null}">
                     <a href="<c:url value='?action=${actFol}&command=${commFridx}&id=${sessionScope.login_user.id}' />">フォロー</a>&nbsp;
                     <a href="<c:url value='?action=${actFol}&command=${commFeidx}&id=${sessionScope.login_user.id}' />">フォロワー</a>&nbsp;

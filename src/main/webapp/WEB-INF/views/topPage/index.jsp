@@ -22,7 +22,7 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
 
-        <h2>${sessionScope.login_user.name} さんのトップページ</h2>
+        <h2>${sessionScope.login_user.name} さんのタイムライン</h2>
 
         <table id="post_list">
             <tbody>

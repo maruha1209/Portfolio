@@ -1,8 +1,6 @@
-# Name（リポジトリ/プロジェクト/OSSなどの名前）
+# Name: Tweet Application
 
-分かりやすくてカッコイイ名前をつける（今回は"hoge"という名前をつける）
-
-"hoge"が何かを簡潔に紹介する
+twitterを模倣した、短文投稿アプリケーションです。
 
 # DEMO
 
@@ -10,50 +8,34 @@
 
 # Features
 
-"hoge"のセールスポイントや差別化などを説明する
+* アカウントを登録し、ツイート(短文)を投稿できます。
+* アカウントやツイートを検索し、閲覧、フォローできます。
+* フォローしたユーザーのツイートが表示されるタイムラインを構築できます。
 
 # Requirement
 
-"hoge"を動かすのに必要なライブラリなどを列挙する
-
-* huga 3.5.2
-* hogehuga 1.0.2
-
-# Installation
-
-Requirementで列挙したライブラリなどのインストール方法を説明する
-
-```bash
-pip install huga_package
-```
+* Java(Java11)
+* DB（MySQL 8.0）
+* AP(Tomcat9)
+* Eclipse 2020
+* javax.servlet-api (4.0.1)
+* mysql-connector-java (8.0.23)
+* hibernate-core (5.4.28.Final)
+* lombok (1.18.16)
+* taglibs-standard-impl (1.2.5)
+* javax.servlet.jsp.jstl-api (1.2.1)
 
 # Usage
 
-DEMOの実行方法など、"hoge"の基本的な使い方を説明する
+GitHubからプロジェクトをclone（ダウンロード）します。
 
-```bash
-git clone https://github.com/hoge/~
-cd examples
-python demo.py
-```
-
-# Note
-
-注意点などがあれば書く
+<pre>$ git clone https://github.com/TmoyukiShirai/p_m.git</pre><br>
+Eclipseにインポートします。<br>
+Tomcatの構成済みのリソースに追加します。<br>
+以下のファイルの接続タブを表示します。<br>
+　　/patisserie_manager/src/META-INF/persistence.xml<br>
+URL・ユーザー・パスワードをお使いのMySQLの情報に変更し、保存します。
 
 # Author
 
-作成情報を列挙する
-
-* 作成者
-* 所属
-* E-mail
-
-# License
-ライセンスを明示する
-
-"hoge" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
-
-社内向けなら社外秘であることを明示してる
-
-"hoge" is Confidential.
+* Haruma Takesue
