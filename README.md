@@ -4,7 +4,7 @@ twitterを模倣した、短文投稿アプリケーションです。
 
 # DEMO
 
-![](https://gyazo.com/8680b3a306c991ae4a55e2d4bf6238ae)
+![](https://gyazo.com/8680b3a306c991ae4a55e2d4bf6238ae.gif)
 
 # Features
 
