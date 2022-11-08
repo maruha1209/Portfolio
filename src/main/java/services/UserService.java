@@ -23,7 +23,7 @@ public class UserService extends ServiceBase {
      * @return 表示するデータのリスト
      */
     public List<UserView> getPerPage(int page) {
-        List<User> employees = em.createNamedQuery(JpaConst.Q_USE_GET_ALL, User.class)
+        List<User> employees = em.createQuery("SELECT e FROM User AS e WHERE e.deleteFlag = 0 ORDER BY e.id")
                 .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
                 .setMaxResults(JpaConst.ROW_PER_PAGE)
                 .getResultList();

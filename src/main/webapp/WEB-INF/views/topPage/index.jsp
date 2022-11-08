@@ -24,6 +24,8 @@
 
         <h2>${sessionScope.login_user.name} さんのタイムライン</h2>
 
+        <p><a href="<c:url value='?action=${actPos}&command=${commNew}' />">ツイートする</a></p>
+
         <table id="post_list">
             <tbody>
                 <tr>

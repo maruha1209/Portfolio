@@ -4,7 +4,7 @@ twitterを模倣した、短文投稿アプリケーションです。
 
 # DEMO
 
-"hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる
+![](https://gyazo.com/8680b3a306c991ae4a55e2d4bf6238ae)
 
 # Features
 

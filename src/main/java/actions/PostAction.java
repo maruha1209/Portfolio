@@ -155,7 +155,7 @@ public class PostAction extends ActionBase {
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
 
                 //一覧画面にリダイレクト
-                redirect(ForwardConst.ACT_POS, ForwardConst.CMD_INDEX, ev.getId());
+                redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
             }
         }
     }
@@ -261,11 +261,10 @@ public class PostAction extends ActionBase {
      * 論理削除を行う
      * @throws ServletException
      * @throws IOException
-     */
+
     public void destroy() throws ServletException, IOException {
 
-        //CSRF対策 tokenのチェック
-        if (checkToken()) { //追記
+
 
             //idを条件に投稿データを論理削除する
             service.destroy(toNumber(getRequestParam(AttributeConst.POS_ID)));
@@ -273,11 +272,30 @@ public class PostAction extends ActionBase {
             //セッションに削除完了のフラッシュメッセージを設定
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
 
-            removeSessionScope(AttributeConst.LOGIN_USE);
-
             //一覧画面にリダイレクト
-            redirect(ForwardConst.ACT_POS, ForwardConst.CMD_INDEX);
+            redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
         }
+    */
+
+    /**
+     * データベースから削除を行う
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void destroy() throws ServletException, IOException {
+
+        //セッションからログイン中のユーザー情報を取得
+        UserView uv = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
+
+        //指定したフォロー情報を削除
+        service.delete(toNumber(getRequestParam(AttributeConst.POS_ID)));
+
+        //セッションに削除完了のフラッシュメッセージを設定
+        putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+
+        //一覧画面にリダイレクト
+        redirect(ForwardConst.ACT_POS, ForwardConst.CMD_INDEX, uv.getId());
 
     }
+
 }

@@ -212,7 +212,19 @@ public class PostService extends ServiceBase {
         savedUse.setDeleteFlag(JpaConst.USE_DEL_TRUE);
 
         //更新処理を行う
-        update(savedUse);
+        updateInternal(savedUse);
+
+    }
+
+    /**
+     * 指定した投稿情報をデータベースから削除
+     */
+    public void delete(int id) {
+
+        em.getTransaction().begin();
+        em.remove(em.find(Post.class, id));       // データ削除
+        em.getTransaction().commit();
+        em.close();
 
     }
 
